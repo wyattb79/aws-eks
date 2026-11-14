@@ -80,6 +80,14 @@ resource "aws_launch_template" "eks-node-template" {
       aws_security_group.eks_nodegroup_sg.id
     ]
   }
+
+  tag_specifications {
+    resource_type = "instance"
+    tags = {
+      SecurityGroupTag = var.cluster_name,
+      SecurityGroupType = "ec2"
+    }
+  }
 }
 
 resource "aws_eks_access_entry" "eks_admins" {

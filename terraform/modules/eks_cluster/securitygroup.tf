@@ -90,6 +90,11 @@ resource "aws_security_group" "eks_ecrapi_endpoint_sg" {
   name        = "eks-ecrapi-endpoint-sg"
   description = "Security group that allows eks to access ecr api endpoint"
   vpc_id      = var.vpc_id
+
+  tags = {
+    SecurityGroupTag = var.cluster_name,
+    SecurityGroupType = "endpoint"
+  }
 }
 
 resource "aws_vpc_security_group_ingress_rule" "allow_ecrapi_nodegroup" {
@@ -106,6 +111,11 @@ resource "aws_security_group" "eks_ecrdkr_endpoint_sg" {
   name        = "eks-ecrdkr-endpoint-sg"
   description = "Security group that allows eks to access ecr dkr endpoint"
   vpc_id      = var.vpc_id
+
+  tags = {
+    SecurityGroupTag = var.cluster_name,
+    SecurityGroupType = "endpoint"
+  }
 }
 
 resource "aws_vpc_security_group_ingress_rule" "allow_ecrdkr_nodegroup" {
