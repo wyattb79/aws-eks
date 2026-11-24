@@ -42,6 +42,8 @@ resource "aws_security_group" "eks_cluster_sg" {
 
   tags = {
     Name = "eks-cluster-sg"
+    SecurityGroupTag = var.cluster_name,
+    SecurityGroupType = "endpoint"
   }
 }
 
