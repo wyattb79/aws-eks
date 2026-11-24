@@ -3,6 +3,11 @@ resource "aws_security_group" "ec2_endpoint_sg" {
   name        = "eks-ec2-endpoint-sg"
   description = "Security group that allows eks to access ec2 endpoint"
   vpc_id      = var.vpc_id
+
+  tags = {
+    SecurityGroupTag = var.cluster_name,
+    SecurityGroupType = "endpoint"
+  }
 }
 
 resource "aws_vpc_security_group_ingress_rule" "allow_tls_nodegroup" {
@@ -61,6 +66,8 @@ resource "aws_security_group" "eks_nodegroup_sg" {
 
   tags = {
     Name = "eks-cluster-sg"
+    SecurityGroupTag = var.cluster_name,
+    SecurityGroupType = "ec2"
   }
 }
 
@@ -132,6 +139,11 @@ resource "aws_security_group" "eks_s3_endpoint_sg" {
   name        = "eks-s3-endpoint-sg"
   description = "Security group that allows eks to access s3 endpoint"
   vpc_id      = var.vpc_id
+
+  tags = {
+    SecurityGroupTag = var.cluster_name,
+    SecurityGroupType = "endpoint"
+  }
 }
 
 resource "aws_vpc_security_group_ingress_rule" "allow_s3_nodegroup" {
