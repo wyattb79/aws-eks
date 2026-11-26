@@ -56,6 +56,22 @@ resource "aws_iam_policy" "eks-nodegroup-policy" {
         Effect = "Allow"
         Resource = "*"
       },
+      {
+        Action = [
+          "ecr:GetAuthorizationToken"
+        ]
+        Effect = "Allow"
+        Resource = "*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:BatchGetImage"
+        ],
+        "Resource": "arn:aws:ecr:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:repository/*"
+      }
     ]
   })
 }

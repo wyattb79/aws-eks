@@ -14,3 +14,6 @@ data "http" "my_public_ip" {
   url = "http://checkip.global.api.aws"
 }
 
+data "aws_region" "current" {}
+
+data "aws_caller_identity" "current" {}
